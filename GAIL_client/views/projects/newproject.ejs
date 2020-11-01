@@ -1,0 +1,58 @@
+<%- include("../partials/header") %>
+
+<div class="row">
+    <h1 style="text-align: center">Float a New Tender</h1>
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/newproject" method="post" encType="multipart/form-data">
+
+            <div class="form-group">
+                <input class="form-control" type="text" name="title" placeholder="Title" required="true">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" type="textarea" rows="4" name="description" resize="vertical" placeholder="Description" required="true"></textarea>
+            </div>
+
+            <div class="form-group">
+                <select class="form-control" name="type">
+                    <option value="Product">Product</option>
+                    <option value="Service">Service</option>
+                </select>
+            </div>
+
+            <div class="form-group mt-3">
+                <label>Upload your Brochure:</label>
+              <input type="file" name="filename" accept="application/pdf" /> 
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                <input class="form-control" id="date" name="date" placeholder="Deadline EOD- MM/DD/YYYY" type="text" required="true"/>
+                </div>
+            </div>
+
+            
+
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'yyyy/mm/dd',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+
+<%- include("../partials/footer") %>

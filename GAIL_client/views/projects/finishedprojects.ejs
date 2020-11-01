@@ -1,0 +1,40 @@
+<%- include("../partials/header") %>
+
+<div class="container" style="margin-top: 30px">
+    <header class="jumbotron" style="height: 50px; padding-top: 0.5%;"> 
+        <div class="container" style="text-align: center;">
+            <h4></span>View All Finished Projects</h4>
+        </div>
+    </header>
+
+	<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+		<% for(var idx in projects) { %>
+			<% const temp = JSON.parse(projects[idx]); %>
+			<% if(temp.status == "complete_accepted" || temp.status == "complete_rejected") { %>
+				<div class="col-md-4 col-sm-6">
+					<div class="thumbnail">
+						<div class="caption">
+							<h3 style="font-weight: bolder;"><%= temp.title %></h3>
+							<% var len = Math.min(30,temp.description.length) %>
+							<h6><%= temp.description.substring(0,len) + " ...."%></h6>
+						</div>
+						<p>
+							<span>Contractor: <%= temp.contractor_id.toUpperCase() %></span> <br>
+							<span>Order Type: <%= temp.type %></span>
+							<br>
+							<% if(temp.brochurePath != "null") { %>
+								<a href= "/download/<%= temp.brochurePath%>" style="color: blue; font-weight: bold;">Download Brochure</a>
+								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+							<% } %>
+						</p>
+						<p>
+							<a href="/finishedprojects/<%= temp.id %>" class="btn btn-primary">More Info</a>
+						</p>
+					</div>
+				</div>
+			<% } %>
+        <% } %>
+	</div>
+</div>
+
+<%- include("../partials/footer") %>

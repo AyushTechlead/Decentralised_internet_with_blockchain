@@ -1,0 +1,49 @@
+<%- include("../partials/header") %>
+
+<div class="container" style="margin-top: 30px">
+	<header class="jumbotron" style="height: 50px; padding-top: 0.5%;">
+		<div class="container" style="text-align: center;">
+			<h4>View All Floated Projects</h4>
+		</div>
+	</header>
+
+	<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+		<% for(var idx in projects) { %>
+		<% const temp = JSON.parse(projects[idx]); %>
+		<% if(temp.status == "floated") { %>
+		<div class="col-md-4 col-sm-6">
+			<div class="thumbnail" style="height:230px">
+				<div class="caption">
+					<% var len1 = Math.min(30,temp.title.length) %>
+					<h3 style="font-weight: bolder;"><%= temp.title.substring(0,len1) + "....." %></h3>
+					<% var len = Math.min(30,temp.description.length) %>
+					<h6><%= temp.description.substring(0,len) + " ...."%></h6>
+				</div>
+				<p>
+					<span style="color: red; font-weight: bold;">Deadline: <%= temp.deadline %></span>
+					<br>
+					<% if(temp.brochurePath != "null") { %>
+					<a href="/download/<%= temp.brochurePath%>">Download Brochure</a>
+					<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+					<% } %>
+				</p>
+				<p>
+				<% if(!relation[temp.id.toString()]) { %>
+					<form action="/projects/apply" method="get">
+						<input type="hidden" name="id" value="<%= temp.id %>" />
+						<input class="btn btn-primary" style="font-weight: bold;" type="submit" value="Apply Bid" />
+					</form>
+				<% } else { %>
+					<div class="text-center">
+						<button id="toggleDetails" class="btn btn-success" style="font-weight: bold;">Bid Already Applied</button>
+					</div>
+				<% } %>
+				</p>
+			</div>
+		</div>
+		<% } %>
+		<% } %>
+	</div>
+</div>
+
+<%- include("../partials/footer") %>

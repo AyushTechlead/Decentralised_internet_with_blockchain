@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% if(designation == "evaluation-agency"){ %>
+  <title>Evaluation Agency</title>
+  <% } else { %>
+  <title>GAIL Corporation</title>
+  <% } %>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Verdana, sans-serif;
+    }
+
+    .navbar-brand {
+      color: #9d9d9d;
+    }
+
+    .mySlides {
+      left: 0px;
+      right: 0px;
+      display: none;
+      object-fit: fill;
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 1000px;
+      position: relative;
+      margin: auto;
+    }
+
+    /* Caption text */
+    .text {
+      color: #f2f2f2;
+      font-size: 15px;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active {
+      background-color: #717171;
+    }
+
+    /* Fading animation */
+    .fade {
+      -webkit-animation-name: fade;
+      -webkit-animation-duration: 4s;
+      animation-name: fade;
+      animation-duration: 4s;
+    }
+
+    @-webkit-keyframes fade {
+      from {
+        opacity: .4
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes fade {
+      from {
+        opacity: .4
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    /* On smaller screens, decrease text size */
+    @media only screen and (max-width: 300px) {
+      .text {
+        font-size: 11px
+      }
+    }
+
+    .footer-top {
+        float: left;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background: #666;
+        font-family: 'Arial', Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 23px;
+        color: #333;
+    }
+  </style>
+</head>
+
+<body style="padding-top: 70px;">
+
+  <nav class="navbar navbar-expand-md fixed-top" style="background-color: #222222; color: #9d9d9d;">
+    <% if(designation == "evaluation-agency"){ %>
+    <a class="navbar-brand" href="/" class="btn btn-lg" style="color: #9d9d9d;">Evaluation Agency</a>
+    <a class="navbar-brand" href="/activeprojects" class="btn btn-lg" style="color: #9d9d9d;">Active Projects</a>
+    <a class="navbar-brand" href="/floatedprojects" class="btn btn-lg" style="color: #9d9d9d;">Floated Projects</a>
+    <% }else{ %>
+    <a class="navbar-brand" href="/" class="btn btn-lg" style="color: #9d9d9d;">GAIL (India) Limited</a>
+    <a class="navbar-brand" href="/activeprojects" class="btn btn-lg" style="color: #9d9d9d;">Active Projects</a>
+    <a class="navbar-brand" href="/floatedprojects" class="btn btn-lg" style="color: #9d9d9d;">Floated Projects</a>
+    <a class="navbar-brand" href="/finishedprojects" class="btn btn-lg" style="color: #9d9d9d;">Finished Projects</a>
+    <a class="navbar-brand" href="/newproject" class="btn btn-lg" style="color: #9d9d9d;">Float a new Project</a>
+    <% } %>
+
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMenu" style="color: #9d9d9d;">
+      <ul class="navbar-nav ml-auto" style="color: #9d9d9d;">
+        <% if(!currentUser){ %>
+        <li><a href="/login" class="navbar-brand btn-md" style="color: #9d9d9d;">Login</a></li>
+        <li><a href="/register" class="navbar-brand btn btn-md" style="color: #9d9d9d;">SignUp</a></li>
+        <% } else{ %>
+        <li><a class="navbar-brand btn btn-md" href="#" style="color: #9d9d9d;">Signed In As
+            <%= currentUser.toUpperCase() %> </a></li>
+        <li><a href="/editprofile" class="navbar-brand btn btn-md" style="color: #9d9d9d;">Edit Profile</a></li>
+        <li><a href="/logout" class="navbar-brand btn btn-md" style="color: #9d9d9d;">Logout</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+  <div class="slideshow-container">
+
+    <% if(designation == "evaluation-agency"){ %>
+    <div class="mySlides fade">
+      <img src="../static/FifthSlide.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <img src="../static/SixthSlide.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <img src="../static/Seventh.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <img src="../static/Eighth.jpg" style="width:100%">
+    </div>
+
+    <% }else{ %>
+    <div class="mySlides fade">
+      <img src="../static/FirstSlide.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="../static/SecondSlide.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="../static/ThirdSlide.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="../static/FourthSlide.jpg" style="width:100%">
+    </div>
+    <% } %>
+
+  </div>
+  <br>
+
+  <div style="text-align:center">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+      setTimeout(showSlides, 4000); // Change image every 2 seconds
+    }
+  </script>
+
+  <div class="container" style="margin-top: 30px;">
+    <div class="row card-deck" style="display:flex; flex-wrap: wrap;">
+      <div class="col-md-6">
+        <p> <br> </p>
+        <div class="container">
+          <div class="card" style="width:400px">
+            <img class="card-img-top" src="../static/card1.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">GAIL Pankh</h4>
+              <p class="card-text">
+                GAIL Pankh is an initiative to identify, invest and nurture Start-ups in our core and some
+                None-core areas that can become successful ventures and contribute to the creation of a Start-ups
+                Nation.
+              </p>
+              <a href="https://gailebank.gail.co.in/GSUICBG/frmStartUpGAIL.aspx" class="btn btn-primary stretched-link"
+                target="_blank">Read More...</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6">
+        <p> <br> </p>
+        <div class="container">
+          <div class="card" style="width:400px">
+            <img class="card-img-top" src="../static/card2.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">E-business</h4>
+              <p class="card-text">GAIL has been a pioneer in introducing e-business systems to bring in transparency
+                and accountability in its business processes and systems for the benefit of various stakeholders.</p>
+              <a href="https://gailonline.com/StakeHolders.html" class="btn btn-primary stretched-link"
+                target="_blank">Read
+                More..</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6">
+        <p> <br> </p>
+        <div class="container">
+          <div class="card" style="width:400px">
+            <img class="card-img-top" src="../static/card3.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">Research & Development</h4>
+              <p class="card-text">At GAIL we believe that Innovation and R&D are the distinguishing
+                factors that can help improve the efficiency of our systems & processes.</p>
+              <a href="https://gailonline.com/R&D.html" class="btn btn-primary stretched-link" target="_blank">Read
+                More..</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <p> <br> </p>
+        <div class="container">
+          <div class="card" style="width:400px">
+            <img class="card-img-top" src="../static/card5.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">Career at GAIL</h4>
+              <p class="card-text">Nicknamed as "Hazira Meter Prover" is Asia's largest and India's only Test Facility
+                for
+                Flow calibration of Ultrasonic and Turbine ...</p>
+              <a href="https://gailonline.com/Hazira.html" class="btn btn-primary stretched-link" target="_blank">Read
+                More..</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <p> <br> </p>
+        <div class="container">
+          <div class="card" style="width:400px">
+            <img class="card-img-top" src="../static/card4.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">Career at GAIL</h4>
+              <p class="card-text">When you choose GAIL, you join the best there is in the Natural Gas business.</p>
+              <a href="https://gailonline.com/CR-JoinGail.html" class="btn btn-primary stretched-link"
+                target="_blank">Read More..</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <p> <br> </p>
+        <div class="container">
+          <div class="card" style="width:400px">
+            <img class="card-img-top" src="../static/card6.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">GAIL Hriday</h4>
+              <p class="card-text">At GAIL, we remain committed to the principles of Corporate Social Responsibility
+                (CSR).</p>
+              <a href="https://gailonline.com/CSR_Index.html" class="btn btn-primary stretched-link"
+                target="_blank">Read More..</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<section class="footer-top">
+  <div class="container mt-30 mb-30">
+    <div class="row"><div class="col-md-3 col-sm-3">
+      <aside class="widget-archive mb-15">
+        <h4>About Website</h4>
+        <div class="yellow-titleline"></div>
+        <ul class="widget-archive-list">
+          <li>
+            <a href="Sitemap.html" title="SITE MAP"><i class="fa fa-angle-right" aria-hidden="true"></i> SITE MAP </a>
+            <a href="https://gailebank.gail.co.in/gems/frmupload.aspx" target="_blank">-</a>
+          </li>
+          <li>
+            <a href="contacts.html" title="CONTACT US"><i class="fa fa-angle-right" aria-hidden="true"></i> CONTACT US</a>
+          </li>
+          <li>
+            <a href="Feedback-form.html" title="YOUR FEEDBACK"><i class="fa fa-angle-right" aria-hidden="true"></i> YOUR FEEDBACK</a>
+          </li>
+          <li>
+            <a href="usefuleLink.html" title="USEFUL LINKS"><i class="fa fa-angle-right" aria-hidden="true"></i> USEFUL LINKS</a>
+            <a href="https://gailebank.gail.co.in/gems/frmentry.aspx" target="_blank">-</a>
+          </li>
+          <li>
+            <a href="disclaimer.html" title="DISCLAIMER"><i class="fa fa-angle-right" aria-hidden="true"></i> DISCLAIMER</a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="col-md-3 col-sm-3">
+      <aside class="widget-archive mb-15">
+        <h4>Important Links</h4>
+        <div class="yellow-titleline"></div>
+        <ul class="widget-archive-list">
+          <li>
+            <a href="https://gailebank.gail.co.in/psadashboard/ministryportal/login.aspx" target="_blank" title="PROJECT DASHBOARD"> <i class="fa fa-angle-right" aria-hidden="true"></i> PROJECT DASHBOARD</a>
+          </li>
+          <li>
+            <a href="CRZ-clearance.html" title="ENVIRONMENT AND CRZ CLEARANCE"><i class="fa fa-angle-right" aria-hidden="true"></i> ENV. CLEARANCE</a>
+          </li>
+          <li>
+            <a href="http://gailonline.com/Hazira.html" target="_blank" title="HAZIRA FLOW METER CALIBRATION FACILITY"><i class="fa fa-angle-right" aria-hidden="true"></i>METER CALIBRATION</a>
+          </li>
+          <li>
+            <a href="RR-Requirements.html" title="REGULATORY REQUIREMENTS"><i class="fa fa-angle-right" aria-hidden="true"></i> REGULATORY NEED</a>
+          </li>
+          <li>
+            <a href="onlineComplants.html" title="ONLINE COMPLAINTS"><i class="fa fa-angle-right" aria-hidden="true"></i> ONLINE COMPLAINTS</a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="col-md-3 col-sm-3">
+      <aside class="widget-archive mb-15">
+        <h4>Other Links</h4><div class="yellow-titleline"></div>
+        <ul class="widget-archive-list">
+          <li>
+            <a href="Integrity.html" title="INTEGRITY PACTS &amp; IEMS"><i class="fa fa-angle-right" aria-hidden="true"></i> INTEGRITY PACTS</a>
+          </li>
+          <li>
+            <a href="https://gailebank.gail.co.in/bws_for_pmc/pmc/pmc_home.asp" target="_blank" title="BILL WATCH SYSTEM FOR PMC (CGD)"><i class="fa fa-angle-right" aria-hidden="true"></i> BILL WATCH SYSTEM)</a>
+          </li>
+          <li>
+            <a href="https://gailebank.gail.co.in/GOGA_AUDIT/frmUserLogin.aspx" target="_blank" title="ORDER/CONTRACT TRANSMITTAL SYSTEM"><i class="fa fa-angle-right" aria-hidden="true"></i>TRANSMITTAL SYSTEM</a>
+          </li>
+          <li>
+            <a href="https://gailebank.gail.co.in/grievance/welcome.aspx" target="_blank" title="VENDOR GRIEVANCE PORTAL- “SAMADHAN”"><i class="fa fa-angle-right" aria-hidden="true"></i> VENDOR GRIEVANCE</a>
+          </li>
+          <li>
+            <a href="https://gailebank.gail.co.in/vendorfeedback/Login.aspx" target="_blank" title="VENDOR FEEDBACK PORTAL"><i class="fa fa-angle-right" aria-hidden="true"></i> VENDOR FEEDBACK</a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="col-md-3 col-sm-3">
+      <aside class="widget-archive mb-15">
+        <h4>Employee Login</h4><div class="yellow-titleline"></div>
+        <ul class="widget-archive-list">
+          <li>
+            <a href="https://gailcorintra.gail.co.in/" target="_blank" title="INTRANET"><i class="fa fa-angle-right" aria-hidden="true"></i> INTRANET</a>
+          </li>
+          <li> <a href="https://mail.gail.co.in" target="_blank" title="WEBMAIL"><i class="fa fa-angle-right" aria-hidden="true"></i> WEBMAIL</a>
+          </li>
+          <li> <a href="https://gailebank.gail.co.in/extapps/prms-new/home.asp" target="_blank" title="GOLDEN RETIREMENT"><i class="fa fa-angle-right" aria-hidden="true"></i> GOLDEN RETIREMENT</a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</div>
+</section>
+
+</html>

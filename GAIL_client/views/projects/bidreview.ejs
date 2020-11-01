@@ -1,0 +1,99 @@
+<%- include("../partials/header") %>
+
+
+
+<div class="row">
+    <% if (designation == "evaluation-agency") { %>
+        <h1 style="text-align: center">Add Inspection</h1>
+    <% } else {%>
+        <h1 style="text-align: center">Financial Bid</h1>
+    <% } %>    
+    <div style="width: 30%; margin: 25px auto;">
+        <form>
+            <input type="hidden" name="bid_id" value="<%= bid_id %>" />
+            <div class="form-group">
+                <label style="float: left">Bid ID</label>
+                <input class="form-control" name="bidID" value="<%= bid_id%>" readonly>
+            </div>
+            <% if(designation != "evaluation-agency") { %>
+                <div class="form-group">
+                    <label style="float: left">Bid Total Price</label>
+                    <input class="form-control" value="<%= bidDetails.price%>" readonly>
+                </div>
+            <% } %>    
+            <div class="form-group">
+                <label style="float: left">Bid Estimation Time Period</label>
+                <input class="form-control" value="<%= bidDetails.time_period%> days" readonly>
+            </div>
+            <%var standardsLength = parseInt(bidDetails.standards.length) %>
+            <% if(standardsLength != 0) {%>
+                <% for(var i=0; i<standardsLength; i++) { %>
+                    <div class="form-group">
+                        <label style="float: left">Standards <%= i+1%></label>
+                        <input class="form-control" value="<%= bidDetails.standards[i]%> days" readonly>
+                    </div>
+                <% } %>
+            <% } %>
+
+            <% if (designation == "evaluation-agency") { %>
+                <% if(bidDetails.brochurePath != "null") { %>
+                    <a href= "/download2/<%= bidDetails.brochurePath%>" style="color: blue;">Download Technical Bid Brochure</a>
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                <% } %>
+                <br>
+    
+                <% if( bidDetails.hasOwnProperty("gailfield") ) {%>
+                    <div class="form-group">
+                        <label style="float: left">GAIL Rating</label>
+                        <input class="form-control" type="number" min="1" max="10" step="1" name="rating" placeholder="Rating" required="true" value="<%= JSON.parse(bidDetails.gailfield).rating %>">
+                    </div>
+                    <div class="form-group">
+                        <label style="float: left">GAIL Review</label>
+                        <textarea class="form-control" type="textarea" rows="4" name="review" resize="vertical" placeholder="Review" required="true"><%= JSON.parse(bidDetails.gailfield).review %>
+                        </textarea>
+                    </div>
+    
+                <% } else { %>
+                    <div class="form-group">
+                        <label style="float: left">GAIL Rating</label>
+                        <input class="form-control" type="number" min="1" max="10" step="1" name="rating" placeholder="Rating" required="true">
+                    </div>
+                    <div class="form-group">
+                        <label style="float: left">GAIL Review</label>
+                        <textarea class="form-control" type="textarea" rows="4" name="review" resize="vertical" placeholder="Review" required="true"></textarea>
+                    </div>
+                <% } %>
+                    
+                <div class="form-group">
+                    <button class="btn btn-lg btn-success btn-block" formmethod="post" formaction="/bidreviewAccept"> Accept Technical Bid and Submit Review</button>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-danger btn-block" formmethod="post" formaction="/bidreviewReject"> Reject Technical Bid</button>
+                </div>            
+            <% } else {%>
+                <table class="table" >
+                    <tr style="text-align: center;"> 
+                        <th > Item </th>
+                        <th > Quantity </th>
+                        <th > Price per Unit </th>
+                        <th > Tax per Unit </th>
+                        <th > Sub Total </th>
+                    </tr>
+                    <% for ( var itemIdx in bidDetails.itemArr) {%>
+                        <% const temp =  bidDetails.itemArr[itemIdx]; %>
+                      <tr style="text-align: center;"> 
+                        <td > <%= temp.item %></td>
+                        <td > <%= temp.quantity %></td>
+                        <td > <%= temp.price %></td>
+                        <td > <%= temp.tax %></td>
+                        <td > <%= (parseInt(temp.tax) + parseInt(temp.price))*(parseInt(temp.quantity))  %></td>
+                      </tr>
+                    <% } %>
+                </table> 
+            <% } %>
+        </form>
+    </div>
+</div>
+ 
+
+<%- include("../partials/footer") %>

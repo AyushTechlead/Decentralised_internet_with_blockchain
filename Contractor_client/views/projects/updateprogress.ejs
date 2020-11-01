@@ -1,0 +1,19 @@
+<%- include("../partials/header") %>
+
+<div class="row">
+    <h1 style="text-align: center">Update the Progress</h1>
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/projects/progress" method="post">
+
+            <div class="form-group">
+                <textarea class="form-control" type="textarea" rows="4" name="description" resize="vertical" placeholder="Progress" required="true"></textarea>
+            </div>
+            <input type="hidden" name="id" value="<%= projectID %>" />
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

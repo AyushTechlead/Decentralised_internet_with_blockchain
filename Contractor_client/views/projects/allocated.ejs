@@ -1,0 +1,87 @@
+<%- include("../partials/header") %>
+
+<% if (project == null) { %>
+	<div class="container" style="margin-top: 30px">
+	    <header class="jumbotron" style="height: 50px; padding-top: 0.5%;">
+	        <div class="container" style="text-align: center;">
+	            <h4>You have no allocated projects.</h4>
+	        </div>
+	    </header>
+	</div>
+<% } else { %>
+	<div class="container" style="margin-top: 30px">
+		<header class="jumbotron" style="height: 50px; padding-top: 0.5%;">
+	     <div class="container" style="text-align: center;">
+	         <h4>View All Allocated Projects</h4>
+	     </div>
+	  </header>
+
+	  	<% if(contractor_details.designation == "contractor") { %>
+		<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+			<div class="col-md-4 col-sm-6">
+				<div class="thumbnail">
+					<div class="caption">
+						<h3 style="font-weight: bolder;"><%= project.title %></h3>
+						<% var len = Math.min(30,project.description.length) %>
+						<h6><%= project.description.substring(0,len) + " ...."%></h6>
+					</div>
+
+					<p>
+						<span style="color: red; font-weight: bold;">Deadline: <%= project.deadline %></span>
+						<br>
+						<% if(project.brochurePath != "null") { %>
+							<a href= "/download/<%= project.brochurePath%>" >Download Brochure</a>
+							<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+						<% } %>
+					</p>
+
+					<p>
+						<form action="/projects/details" method="get">
+							<input type="hidden" name="id" value="<%= project.id %>" />
+							<input class="btn btn-primary" type="submit" value="More info" />
+						</form>
+					</p>
+
+				</div>
+			</div>
+		</div>
+		<% } else { %>
+				<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+					<% for(var idx in allProjects) { %>
+					<% const singleProject = JSON.parse(allProjects[idx]); %>
+					<% if(singleProject.status=="manufactured" || singleProject.status == "in-shipment") { %>
+						<div class="col-md-4 col-sm-6">
+							<div class="thumbnail">
+								<div class="caption">
+									<h3 style="font-weight: bolder;"><%= singleProject.title %></h3>
+									<% var len = Math.min(30,singleProject.description.length) %>
+									<h6><%= singleProject.description.substring(0,len) + " ...."%></h6>
+								</div>
+			
+								<p>
+									<span style="color: red; font-weight: bold;">Deadline: <%= singleProject.deadline %></span>
+									<br>
+									<% if(singleProject.brochurePath != "null") { %>
+										<a href= "/download/<%= singleProject.brochurePath%>" >Download Brochure</a>
+										<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+									<% } %>
+								</p>
+			
+								<p>
+									<form action="/projects/details" method="get">
+										<input type="hidden" name="id" value="<%= singleProject.id %>" />
+										<input class="btn btn-primary" type="submit" value="More info" />
+									</form>
+								</p>
+			
+							</div>
+						</div>
+					<% } %>
+					<% } %>
+				</div>
+		<% } %>
+	</div>
+
+<% } %>
+
+<%- include("../partials/footer") %>

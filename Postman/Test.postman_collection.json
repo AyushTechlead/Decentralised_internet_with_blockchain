@@ -1,0 +1,375 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Test copy",
+		"_postman_id": "7c86c3dd-03cb-cdd1-78e9-8df0e69d59d8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Gail Admin Signup",
+			"request": {
+				"url": "localhost:3000/gail/admin/signup",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Contractor Admin signup",
+			"request": {
+				"url": "localhost:3000/contractors/admin/signup",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Gail User signup",
+			"request": {
+				"url": "localhost:3000/gail/users/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"disha\",\n    \"password\":\"disha\",\n    \"email\":\"disha@gmail.com\",\n    \"teamname\": \"\",\n    \"profilePic\": \"\",\n    \"name\": \"Disha Gupta\",\n    \"contact\": \"123\",\n    \"address\": \"\",\n    \"designation\": \"gail team\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GAIL User Login",
+			"request": {
+				"url": "localhost:3000/gail/users/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"chirag\",\n    \"password\":\"chirag\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Contractor User signup",
+			"request": {
+				"url": "localhost:3000/contractors/users/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"chirag\",\n    \"password\":\"chirag\",\n    \"email\":\"cgupta2727@gmail.com\",\n    \"contact\": \"7696203663\",\n    \"address\": \"Panchkula\",\n    \"aboutUs\": \"Trustworthy Company\",\n    \"profilepic\": \"tempPath\",\n    \"mid\": \"1231\",\n    \"mkey\": \"2423\",\n    \"designation\": \"contractor\"\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add project",
+			"request": {
+				"url": "localhost:3000/gail/project/createProject",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"chirag\",\n    \"password\":\"chirag\",\n    \"title\":\"New Project\",\n    \"description\":\"Good Project\",\n    \"currentTime\":\"2020/07/28\",\n    \"deadlineTime\":\"2020/08/15\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project id 1",
+			"request": {
+				"url": "http://localhost:3000/gail/project/getProject",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"3\"\n    \n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Apply Bid",
+			"request": {
+				"url": "localhost:3000/contractors/bids/applyForProject",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"disha\",\n    \"password\": \"disha\",\n    \"projectID\": \"1\",\n    \"bidDetails\": {\n        \"price\": \"140\",\n        \"time_period\": \"13\",\n        \"standards\": [\"ISO-21\", \"HallMark\", \"ABC-21\"]\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Bid evaluation",
+			"request": {
+				"url": "http://localhost:3000/gail/bideval/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"chirag\",\n    \"password\":\"chirag\",\n    \"id\":\"2\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Contractor User login",
+			"request": {
+				"url": "localhost:3000/contractors/users/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"chirag\",\n    \"password\":\"chirag\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Contractor get allocated project",
+			"request": {
+				"url": "localhost:3000/contractors/project/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"disha\",\n    \"password\":\"disha\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Contractor update project status",
+			"request": {
+				"url": "localhost:3000/contractors/project/updateProjectStatus",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"chirag\",\n    \"password\":\"chirag\",\n    \"status\":\"complete-rejected\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Contractor update project progress",
+			"request": {
+				"url": "localhost:3000/contractors/project/updateProjectStatus",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"utkarsh\",\n    \"password\":\"password\",\n    \"description\":\"string\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Accept Project",
+			"request": {
+				"url": "http://localhost:3000/gail/project/acceptProject",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"lavish\",\n    \"password\":\"password\",\n    \"id\":\"1\",\n    \"rating\":\"6\",\n    \"quality\":\"80\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Reject Project",
+			"request": {
+				"url": "http://localhost:3000/gail/project/rejectProject",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"lavish\",\n    \"password\":\"password\",\n    \"id\":\"1\",\n    \"rating\":\"3\",\n    \"quality\":\"17\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Projects",
+			"request": {
+				"url": "http://localhost:3000/gail/project/getAllProjects",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Bid",
+			"request": {
+				"url": "http://localhost:3000/gail/bideval/getSingleBid",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bid_id\":\"1596131843985\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Details",
+			"request": {
+				"url": "localhost:3000/gail/users/getUserDetails",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"chirag\",\n    \"password\":\"chirag\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Bids for Single Project",
+			"request": {
+				"url": "http://localhost:3000/gail/project/getAllBids",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"3\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "After Payment",
+			"request": {
+				"url": "http://localhost:8000/payment/result",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"CURRENCY\": \"INR\",\n\t\"GATEWAYNAME\": \"WALLET\",\n\t\"RESPMSG\": \"Txn Success\",\n\t\"BANKNAME\": \"WALLET\",\n\t\"PAYMENTMODE\": \"PPI\",\n\t\"MID\": \"zaIKaq4490860014814\",\n\t\"RESPCODE\": \"01\",\n\t\"TXNID\": \"20200731111212800110168757601772491\",\n\t\"TXNAMOUNT\": \"150.00\",\n\t\"ORDERID\": \"1596185560820_zaIKaq44908600148140\",\n\t\"STATUS\": \"TXN_SUCCESS\",\n\t\"BANKTXNID\": \"62955190\",\n\t\"TXNDATE\": \"2020-07-31 14:22:42.0\"\n }\n"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

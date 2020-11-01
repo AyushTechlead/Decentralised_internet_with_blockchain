@@ -1,0 +1,74 @@
+<%- include("./partials/header") %>
+
+<div class="container">
+    <h1>Edit Profile</h1>
+  	<hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="../ContractorProfile/<%= contractor.profilePicPath %>" width="150" height="150" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+            <form action="/profile/changeProfilePic" method="post" enctype="multipart/form-data">
+              <input type="file" class="form-control" name="profilepic">
+              <input type="hidden" name="path" value="<%= contractor.profilePicPath %>">
+              <input type="submit" class="btn btn-primary" style="margin-top: 10px" value="Upload">
+          </form>
+        </div>
+      </div>
+
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a>
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div>
+        <h3>Personal info</h3>
+
+        <form action="/profile/edit" method="post" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Username:</label>
+            <div class="col-lg-8">
+              <input readonly class="form-control" name="username" type="text" value=<%= contractor.username %>>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="email" name="email" value=<%= contractor.email %>>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Contact:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" name="contact" value=<%= contractor.contact %>>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Address:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" name="address" value="<%= contractor.address %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">About Us:</label>
+            <div class="col-md-8">
+              <textarea class="form-control" rows="3" name="aboutus"><%= contractor.aboutUs %></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input type="submit" class="btn btn-primary" value="Save Changes">
+              <span></span>
+              <input type="reset" class="btn btn-default" value="Cancel">
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+
+<%- include("./partials/footer") %>

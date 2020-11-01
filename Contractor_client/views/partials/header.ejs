@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Home</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../public/css/list_style.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <!-- Bootstrap Date-Picker Plugin -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    </head>
+    <body>
+
+        <nav class="nav navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <% if(designation == "contractor"){ %>
+    				<a class="navbar-brand" href="/" class="btn btn-lg">Contractors</a>
+    				<a class="navbar-brand" href="/projects/floated" class="btn btn-lg">Floated Projects</a>
+    				<a class="navbar-brand" href="/projects/allocated" class="btn btn-lg">Allocated Projects</a>
+    				<a class="navbar-brand" href="/projects/completed" class="btn btn-lg">Completed Projects</a>
+    				<% } else if (designation == "shipping-agency"){ %>
+    				<a class="navbar-brand" href="/" class="btn btn-lg">Shipment</a>
+    				<a class="navbar-brand" href="/projects/allocated" class="btn btn-lg">Allocated Projects</a>
+    				<% }%>
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <% if(!currentUser){ %>
+                            <li><a href="/login" class="btn btn-lg">Login</a></li>
+                            <li><a href="/register" class="btn btn-lg">Register</a></li>
+                        <% } else{ %>
+                            <li><a href="/profile" class="btn btn-lg">Signed In As <%= currentUser.toUpperCase() %> </a></li>
+                            <li><a href="/logout" class="btn btn-lg">Logout</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>

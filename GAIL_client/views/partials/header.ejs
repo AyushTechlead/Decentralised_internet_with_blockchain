@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% if(designation == "evaluation-agency"){ %>
+        <title>Evaluation Agency</title>
+        <% } else { %>
+        <title>GAIL Corporation</title>
+        <% } %>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <!-- Bootstrap Date-Picker Plugin -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+        <link rel="stylesheet" type="text/css" href="css/spinner.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <body style="padding-top: 60px;">
+
+        <nav class="nav navbar-inverse navbar-fixed-top mt-3">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <% if(designation == "evaluation-agency"){ %>
+                    <a class="navbar-brand" href="/" class="btn btn-lg">Evaluation Agency</a>
+                    <a class="navbar-brand" href="/activeprojects" class="btn btn-lg">Active Projects</a>
+                    <a class="navbar-brand" href="/floatedprojects" class="btn btn-lg">Floated Projects</a>
+                    <% }else{ %>
+                    <a class="navbar-brand" href="/" class="btn btn-lg">GAIL (India) Limited</a>
+                    <a class="navbar-brand" href="/activeprojects" class="btn btn-lg">Active Projects</a>
+                    <a class="navbar-brand" href="/floatedprojects" class="btn btn-lg">Floated Projects</a>
+                    <a class="navbar-brand" href="/finishedprojects" class="btn btn-lg">Finished Projects</a>
+                    <a class="navbar-brand" href="/newproject" class="btn btn-lg">Float a new Project</a>
+                    <% } %>
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <% if(!currentUser){ %>
+                            <li><a href="/login" class="btn btn-lg">Login</a></li>
+                            <li><a href="/register" class="btn btn-lg">SignUp</a></li>
+                        <% } else{ %>
+                            <li><a class="btn btn-lg">Signed In As <%= currentUser.toUpperCase() %> </a></li>
+                            <li><a href="/editprofile" class="btn btn-lg">Edit Profile</a></li>
+                            <li><a href="/logout" class="btn btn-lg">Logout</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>

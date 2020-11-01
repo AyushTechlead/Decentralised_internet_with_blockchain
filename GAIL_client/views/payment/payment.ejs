@@ -1,0 +1,28 @@
+<%- include("../partials/header") %>
+
+<div class="row">
+    <h1 style="text-align: center">Redirecting to Paytm</h1>
+    <div class="sk-chase">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+    </div>
+    <div style="width: 30%; margin: 25px auto;">
+        <form method="post" action=<%= actionUrl %> name="paytm">
+            <table border="1">
+               <tbody>
+                  <input type="hidden" name="mid" value=<%= mid %>>
+                  <input type="hidden" name="orderId" value=<%= orderId %>>
+                  <input type="hidden" name="txnToken" value=<%= txnToken %>>
+               </tbody>
+            </table>
+            <script type="text/javascript"> document.paytm.submit(); </script>
+        </form>
+        
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

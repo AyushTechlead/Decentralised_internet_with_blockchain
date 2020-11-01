@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GAIL Corporation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    <link rel="stylesheet" type="text/css" href="css/spinner.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <style>
+        .toolTip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .toolTiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: turquoise;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px 10px;
+
+            /* Position the tooltip */
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            top: -5px;
+            left: 105%;
+        }
+
+        .toolTip:hover .toolTiptext {
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f1f1f1;">
+
+    <nav class="navbar navbar-expand-md" style="background-color: #222222; color: #9d9d9d;">
+        <% if(designation == "evaluation-agency"){ %>
+        <a class="navbar-brand" href="/" class="btn btn-lg">Evaluation Agency</a>
+        <a class="navbar-brand" href="/activeprojects" class="btn btn-lg">Active Projects</a>
+        <a class="navbar-brand" href="/floatedprojects" class="btn btn-lg">Floated Projects</a>
+        <% }else{ %>
+        <a class="navbar-brand" href="/" class="btn btn-lg">GAIL (India) Limited</a>
+        <a class="navbar-brand" href="/activeprojects" class="btn btn-lg">Active Projects</a>
+        <a class="navbar-brand" href="/floatedprojects" class="btn btn-lg">Floated Projects</a>
+        <a class="navbar-brand" href="/finishedprojects" class="btn btn-lg">Finished Projects</a>
+        <a class="navbar-brand" href="/newproject" class="btn btn-lg">Float a new Project</a>
+        <% } %>
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu" style="color: #9d9d9d;">
+            <ul class="navbar-nav ml-auto" style="color: #9d9d9d;">
+
+
+                <% if(!currentUser){ %>
+                <li><a href="/login" class="navbar-brand btn-md" style="color: #9d9d9d;">Login</a></li>
+                <li><a href="/register" class="navbar-brand btn btn-md" style="color: #9d9d9d;">SignUp</a></li>
+                <% } else{ %>
+                <li><a class="navbar-brand btn btn-md" href="#" style="color: #9d9d9d;">Signed In As
+                        <%= currentUser.toUpperCase() %> </a></li>
+                <li><a href="/editprofile" class="navbar-brand btn btn-md" style="color: #9d9d9d;">Edit Profile</a></li>
+                <li><a href="/logout" class="navbar-brand btn btn-md" style="color: #9d9d9d;">Logout</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+    <br>
+    <div class="container" style="margin-top: 30px;">
+        <h1 style="text-align: center;"><%=data.title%></h1>
+    </div>
+    <br>
+    <div class="card mb-3" style="width: 40em; margin: 0 auto; border-color: coral; border-radius: 10px;">
+        <div class="card-body" style="text-align: center;">
+            <% var len = Math.min(100,data.description.length) %>
+            <div class="toolTip">
+                <h6><%= data.description.substring(0,len) + " ...."%></h6>
+                <span class="toolTiptext"><%= data.description %></span>
+            </div>
+            <h6 style="color: red; font-weight: bold;">Deadline Date: <%= data.deadline %></h6>
+            <h6>Created Date: <%= data.createTimeStamp %></h6>
+            <p>
+                <% if(data.brochurePath != "null") { %>
+                <a href="/download/<%= data.brochurePath%>" style="color: blue;">Download Brochure</a>
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                <% } %>
+            </p>
+        </div>
+    </div>
+
+
+    <% if(showAll) { %>
+    <% var allReviewed = true; %>
+    <% var atleastOneTrue = false; %>
+    <% if(allBidDetails.length === 0) {%>
+    <h1 style="text-align: center; color: cornflowerblue; margin-top: 50px;">No Bids Applied Yet</h1>
+    <% } else { %>
+    <div class="container" style="margin-top: 30px;">
+        <div class="row card-deck" style="display:flex; flex-wrap: wrap;">
+            <% for(var idx in allBidDetails) { %>
+            <% const singleBid = allBidDetails[idx] %>
+
+            <% if(!JSON.parse(singleBid.object.bidDetails).hasOwnProperty("gailfield")) {%>
+            <% allReviewed = false; %>
+            <% } else { %>
+            <% if( JSON.parse(JSON.parse(singleBid.object.bidDetails).gailfield).accept == "true") {%>
+            <% atleastOneTrue = true; %>
+            <% } %>
+            <% } %>
+
+            <% if((designation != "evaluation-agency" && JSON.parse(singleBid.object.bidDetails).hasOwnProperty("gailfield")) || designation == "evaluation-agency"){%>
+            <div class="col-md-4 col-sm-6">
+                <div class="card border-primary">
+                    <div class="card-body" style="text-align: center; min-width: 10em;">
+                        <h4 class="card-title" style="font-weight: bolder; color: saddlebrown;">Bid by:
+                            <%= singleBid.object.username.toUpperCase() %></h4>
+                        <p class="card-text">
+                            <span style="font-weight: bold;">Bid ID: </span><%= singleBid.id %> <br>
+                            <span style="font-weight: bold;">Estimated Days for Completion: </span>
+                            <%= JSON.parse(singleBid.object.bidDetails).time_period %> days <br>
+                            <span style="font-weight: bold;">Standard Certifications: </span>
+                            <%= JSON.parse(singleBid.object.bidDetails).standards %>
+
+                            <% if(JSON.parse(singleBid.object.bidDetails).hasOwnProperty("gailfield")) {%>
+                            <span style="font-weight: bold;">Bid Evaluation Rating: </span>
+                            <%= JSON.parse(JSON.parse(singleBid.object.bidDetails).gailfield).rating %> <br>
+
+                            <span style="font-weight: bold;">Bid Evaluation Comment: </span>
+                            <%= JSON.parse(JSON.parse(singleBid.object.bidDetails).gailfield).review %> <br>
+                            <% if(JSON.parse(JSON.parse(singleBid.object.bidDetails).gailfield).accept == "true") {%>
+                                
+                            <span style="font-weight: bold; color: green;">TECHNICAL BID ACCEPTED </span>
+                            <%} else {%>
+                            <span style="font-weight: bold; color: red;">TECHNICAL BID REJECTED </span>
+                            <% }%>
+                            
+                            <% }%>
+
+                            <% if(designation == "evaluation-agency" && JSON.parse(singleBid.object.bidDetails).hasOwnProperty("gailfield")){ %>
+                                <form action="/bidreview" method="get">
+                                    <input type="hidden" name="bid_id" value="<%= singleBid.id %>" />
+                                    <input class="btn btn-primary" type="submit" value="Update the Bid Review" />
+                                </form>
+                            <% } %>
+
+                            <% if(designation == "evaluation-agency" && !JSON.parse(singleBid.object.bidDetails).hasOwnProperty("gailfield")){ %>
+                                <form action="/bidreview" method="get">
+                                    <input type="hidden" name="bid_id" value="<%= singleBid.id %>" />
+                                    <input class="btn btn-primary" type="submit" value="Review the Bid" />
+                                </form>
+                            <%} else if(designation != "evaluation-agency"){%>
+                                <form action="/bidreview" method="get">
+                                    <input type="hidden" name="bid_id" value="<%= singleBid.id %>" />
+                                    <input class="btn btn-primary" type="submit" value="View Financial Bid" />
+                                </form>
+                            <% } %>
+                        </p>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <% } %>
+            <% } %>
+        </div>
+
+        <% if(designation != "evaluation-agency"){ %>
+        <% if(allReviewed == true && atleastOneTrue == true){ %>
+        <div class="text-center">
+            <a href="/submitAllBids/<%= data.id%>" class="btn btn-lg btn-outline-success">Submit All Bids</a>
+        </div>
+        <% } else if(allReviewed == false) {%>
+        <div class="text-center">
+            <a href="#" class="btn btn-lg btn-outline-danger">Evaluation Pending by Agency</a>
+        </div>
+        <% } else { %>
+        <% if(!atleastOneTrue) %>
+        <div class="text-center">
+            <a href="#" class="btn btn-lg btn-outline-danger">Evaluation Agency has rejected all technical bids</a>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
+    <% }%>
+    <% } else { %>
+        <div class="text-center">
+            <button id="toggleDetails" class="btn btn-outline-danger" style="font-weight: bold; border-width: 3px;">
+                Project Deadline for applying bids is still not over!!
+            </button>
+        </div>
+    <% } %>
+
+</body>
+
+</html>

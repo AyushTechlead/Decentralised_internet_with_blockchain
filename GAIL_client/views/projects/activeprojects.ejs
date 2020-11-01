@@ -1,0 +1,73 @@
+<%- include("../partials/header") %>
+
+<div class="container" style="margin-top: 30px">
+    <header class="jumbotron" style="height: 50px; padding-top: 0.5%;"> 
+        <div class="container" style="text-align: center;">
+            <h4></span>View All Active Projects</h4>
+        </div>
+    </header>
+
+	<% if(designation != "evaluation-agency") {%>
+		<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+			<% for(var idx in projects) { %>
+				<% const temp = JSON.parse(projects[idx]); %>
+				<% if(temp.status == "in-progress" || temp.status == "in-shipment" || temp.status == "in-review" || temp.status == "in-pre-review" || temp.status == "manufactured") { %>
+					<div class="col-md-4 col-sm-6">
+						<div class="thumbnail">
+							<div class="caption">
+								<h3 style="font-weight: bolder;"><%= temp.title %></h3>
+								<% var len = Math.min(30,temp.description.length) %>
+								<h6><%= temp.description.substring(0,len) + " ...."%></h6>
+							</div>
+							<p>
+								<span>Contractor: <%= temp.contractor_id.toUpperCase() %></span>
+								<br>
+								<span style="color: red; font-weight: bold;">Current Status: <%= temp.status %></span>
+								<br>
+								<% if(temp.brochurePath != "null") { %>
+									<a href= "/download/<%= temp.brochurePath%>" style="color: blue;">Download Brochure</a>
+									<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+								<% } %>
+							</p>
+							<p>
+								<a href="/activeprojects/<%= temp.id %>" class="btn btn-primary">More Info</a>
+							</p>
+						</div>
+					</div>
+				<% } %>
+			<% } %>
+		</div>
+	<% } else {%>
+		<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+			<% for(var idx in projects) { %>
+				<% const temp = JSON.parse(projects[idx]); %>
+				<% if(temp.status == "in-pre-review") { %>
+					<div class="col-md-4 col-sm-6">
+						<div class="thumbnail">
+							<div class="caption">
+								<h3 style="font-weight: bolder;"><%= temp.title %></h3>
+								<% var len = Math.min(30,temp.description.length) %>
+								<h6><%= temp.description.substring(0,len) + " ...."%></h6>
+							</div>
+							<p>
+								<span>Contractor: <%= temp.contractor_id.toUpperCase() %></span>
+								<br>
+								<span style="color: red; font-weight: bold;">Current Status: <%= temp.status %></span>
+								<br>
+								<% if(temp.brochurePath != "null") { %>
+									<a href= "/download/<%= temp.brochurePath%>" style="color: blue;">Download Brochure</a>
+									<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+								<% } %>
+							</p>
+							<p>
+								<a href="/activeprojects/<%= temp.id %>" class="btn btn-primary">More Info</a>
+							</p>
+						</div>
+					</div>
+				<% } %>
+			<% } %>
+		</div>
+	<% }%>
+
+</div>
+<%- include("../partials/footer") %>

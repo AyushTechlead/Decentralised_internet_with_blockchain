@@ -1,0 +1,4 @@
+node_modules/
+package-lock.json
+routes/gail/wallet
+routes/contractors/wallet

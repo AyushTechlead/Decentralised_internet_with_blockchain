@@ -1,0 +1,78 @@
+<%- include("./partials/header") %>
+
+<div class="row">
+    <h1 style="text-align: center">Edit Profile</h1>
+    <div style="width: 50%; margin: 25px auto;">
+        <form class="form-horizontal" action="/editprofile" method="post">
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Email</label>
+                <div class="col-lg-8">
+                    <input class="form-control" type="text" name="email" placeholder="Email" required="true" value="<%=user.email%>" readonly>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Username</label>
+                <div class="col-lg-8">
+                    <input class="form-control" type="text" name="username" placeholder="Username" required="true" value="<%=user.username%>" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Full Name</label>
+                <div class="col-lg-8">
+                    <input class="form-control" type="text" name="name" placeholder="Full Name" required="true" value="<%=user.name%>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Contact Number:</label>
+                <div class="col-lg-8">
+                    <input class="form-control" type="tel" name="contact" placeholder="Contact" value="<%=user.contact%>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">TeamName</label>
+                <div class="col-lg-8">
+                    <input class="form-control" type="text" name="teamname" placeholder="TeamName" value="<%=user.teamName%>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Address</label>
+                <div class="col-lg-8">
+                    <input class="form-control" type="text" name="address" placeholder="Address" value="<%=user.address%>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Designation</label>
+                <div class="col-lg-8">
+                    <input class="form-control" type="text" name="designation" placeholder="Designation" value="<%=user.designation%>">
+                </div>
+            </div>
+
+            <div class="form-group"> 
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-8">
+                  <button class="btn btn-primary">Save Changes</button>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <input type="reset" class="btn btn-default" value="Cancel">
+                </div>
+              </div>
+            <!-- <div class="form-group">
+                <label class="col-lg-3 control-label"></label>
+                <div class="col-lg-8">
+                    <button class="btn btn-lg btn-primary btn-block">Edit Profile</button>
+                </div>
+            </div> -->
+        </form>
+    </div>
+</div>
+
+<%- include("./partials/footer") %>
